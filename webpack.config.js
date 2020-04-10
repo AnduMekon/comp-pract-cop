@@ -5,6 +5,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = (env) => {
   const isProduction = env === 'production';
   const CSSExtract = new ExtractTextPlugin('styles.css');
+  const HtmlPlug = new HtmlWebpackPlugin({
+    filename: 'index.html',
+    template: './src/index.html'
+})
   return {
   entry: ['babel-polyfill','./src/js/index.js'],
   output: {
@@ -39,10 +43,8 @@ module.exports = (env) => {
   },
   plugins: [
     CSSExtract,
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: './src/index.html'
-  })
+    HtmlPlug
+  
   ],
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
